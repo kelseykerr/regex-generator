@@ -1,0 +1,37 @@
+<div ng-controller="MainCtrl" class="regex-page">
+  <h4>my regex:</h4>
+
+  <form name="regexRequirements">
+    <button type="button" class="btn" ng-click="regexForm.addRequirement()"
+            ng-if="regexForm.regexRequirements.length == 0">add requirement
+    </button>
+    <div class="form-group" ng-repeat="requirement in regexForm.regexRequirements">
+    <span>
+    <label>must contain</label>
+    <select class="dropdown col-lg-4 regex-field"
+            ng-model="requirement.value"
+            ng-options="option as option for option in regexForm.characterOptions">
+    </select>
+      <input type="text" class="regex-field" ng-model="requirement.sequence" ng-if="regexForm.hasInput(requirement.value)">
+    <input type="number" class="col-lg-1 regex-field" ng-model="requirement.repeat">
+    <label>time(s)</label>
+            <a href="" ng-click="regexForm.removeRequirement(requirement)" class="remove-requirement"><i
+              class="fa fa-minus-square-o fa-2x"/></a>
+      <a href="" ng-click="regexForm.addRequirement()" class="add-requirement"><i
+        class="fa fa-plus-square-o fa-2x"/></a>
+      </span>
+    </div>
+  </form>
+  <button type="button" class="btn" ng-click="regexForm.calculateRegex()"
+          ng-if="regexForm.regexRequirements.length != 0">generate regex
+  </button>
+
+  <div ng-if="regexForm.regex != undefined && regexForm.regex.length > 0 && regexForm.regexRequirements.length > 0">
+    <div><h4>regex = {{regexForm.regex}} </h4></div>
+    <label>test my regex</label>
+    <input type="text" class="regex-field" ng-model="regexForm.testString">
+    <span ng-if="regexForm.isMatch" class="match"><i class="icon fa fa-check-circle-o fa-2x"/> match</span>
+    <span ng-if="!regexForm.isMatch" class="no-match"> <i class="icon fa fa-times-circle-o fa-2x"/> no match</span>
+
+  </div>
+</div>
