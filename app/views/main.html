@@ -21,6 +21,14 @@
         class="fa fa-plus-square-o fa-2x"/></a>
       </span>
     </div>
+
+    <div class="form-group">
+      <label>have between</label>
+      <input type="number" class="col-lg-2 regex-field" ng-model="regexForm.minChars">
+      <label>and</label>
+      <input type="number" class="col-lg-2 regex-field" ng-model="regexForm.maxChars">
+      <label>characters.</label>
+    </div>
   </form>
   <button type="button" class="btn" ng-click="regexForm.calculateRegex()"
           ng-if="regexForm.regexRequirements.length != 0">generate regex
@@ -29,7 +37,7 @@
   <div ng-if="regexForm.regex != undefined && regexForm.regex.length > 0 && regexForm.regexRequirements.length > 0">
     <div><h4>regex = {{regexForm.regex}} </h4></div>
     <label>test my regex</label>
-    <input type="text" class="regex-field" ng-model="regexForm.testString">
+    <input type="text" class="col-lg-6 regex-field" ng-model="regexForm.testString">
     <span ng-if="regexForm.isMatch" class="match"><i class="icon fa fa-check-circle-o fa-2x"/> match</span>
     <span ng-if="!regexForm.isMatch" class="no-match"> <i class="icon fa fa-times-circle-o fa-2x"/> no match</span>
 

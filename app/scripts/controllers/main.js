@@ -81,6 +81,13 @@ angular.module('regexGeneratorApp')
       calculateRegex: function() {
         var regex = '';
         var requirements = $scope.regexForm.regexRequirements;
+        var minChars = $scope.regexForm.minChars;
+        var hasMinChars = minChars !== undefined && minChars !== null;
+        var maxChars = $scope.regexForm.maxChars;
+        var hasMaxChars = maxChars !== undefined && maxChars !== null;
+        if (hasMinChars || hasMaxChars) {
+          regex += '^';
+        }
         for (var i = 0, len = requirements.length; i < len; i++) {
           if (requirements[i].repeat === 0) {
             continue;
@@ -96,6 +103,17 @@ angular.module('regexGeneratorApp')
             }
             regex += ')';
           }
+        }
+        if (hasMinChars || hasMaxChars) {
+          regex += '.{';
+          regex += hasMinChars ? minChars : '0';
+          if (hasMinChars) {
+            regex += minChars;
+          }
+          if (hasMaxChars) {
+            regex += ',' + maxChars;
+          }
+          regex += '}$';
         }
         $scope.regexForm.regex = regex;
         $scope.regexForm.testString = '';
