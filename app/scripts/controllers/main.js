@@ -106,12 +106,9 @@ angular.module('regexGeneratorApp')
         }
         if (hasMinChars || hasMaxChars) {
           regex += '.{';
-          regex += hasMinChars ? minChars : '0';
-          if (hasMinChars) {
-            regex += minChars;
-          }
+          regex += hasMinChars ? minChars + ',' : '0,' ;
           if (hasMaxChars) {
-            regex += ',' + maxChars;
+            regex += maxChars;
           }
           regex += '}$';
         }
